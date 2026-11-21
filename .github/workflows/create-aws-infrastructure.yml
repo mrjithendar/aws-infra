@@ -22,7 +22,7 @@ concurrency:
 jobs:
   terraform:
     if: github.ref == 'refs/heads/master'
-    runs-on: mk4
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 180
     defaults:
       run:
@@ -38,7 +38,7 @@ jobs:
         with:
           persist-credentials: false
 
-      # The mk4 runners have no instance role; assume github-tools-terraform (infrastructure/github-oidc-role.tf).
+      # GitHub-hosted runners have no AWS role of their own; assume github-tools-terraform (infrastructure/github-oidc-role.tf).
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
